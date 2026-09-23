@@ -1,0 +1,1108 @@
+@import "tailwindcss";
+
+@theme {
+  --color-sky-50: #f0f7ff;
+  --color-sky-100: #e0f0ff;
+  --color-sky-200: #bae0ff;
+  --color-sky-300: #7cc4ff;
+  --color-sky-400: #0a84ff; /* Spiderman Web Blue */
+  --color-sky-500: #0066cc; /* Royal Blue */
+  --color-sky-600: #0055b3;
+  --color-sky-700: #004488;
+  --color-sky-800: #003366;
+  --color-sky-900: #002244;
+  --color-sky-950: #001122;
+
+  --color-rose-50: #fff5f5;
+  --color-rose-100: #ffebeb;
+  --color-rose-200: #ffd6d6;
+  --color-rose-300: #ffa3a3;
+  --color-rose-400: #ff3b30; /* Electric scarlet */
+  --color-rose-500: #e31b23; /* Classic Spiderman crimson */
+  --color-rose-600: #c01017;
+  --color-rose-700: #990000;
+  --color-rose-800: #7a0000;
+  --color-rose-900: #4a0000;
+
+  --color-amber-400: #ffd700; /* Spiderman yellow logo/eyes accent */
+  --color-amber-500: #ffcc00;
+  --color-amber-600: #e6b800;
+
+  --color-emerald-400: #00e676; /* Mavis electric emerald/green */
+  --color-emerald-500: #00c853;
+  --color-emerald-600: #009624;
+}
+
+/* Base style overrides to transform the dark mode into a high-tech Spiderman navy cockpit */
+:not(.light) body,
+:not(.light) .mavis-app {
+  background-color: #080C14 !important; /* Spider suit dark navy base */
+}
+
+.light body,
+.light .mavis-app {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+}
+
+/* Hex background mapping overrides under dark mode */
+:not(.light) .bg-\[\#0A0B0E\],
+:not(.light) .bg-\[\#060F1F\]\/75,
+:not(.light) .bg-slate-950 {
+  background-color: #05080E !important;
+}
+
+:not(.light) .bg-\[\#0F1117\],
+:not(.light) .bg-slate-900 {
+  background-color: #090E1A !important;
+}
+
+:not(.light) .bg-\[\#1A1D23\],
+:not(.light) .bg-[#1A1D23] {
+  background-color: #0F182A !important;
+}
+
+:not(.light) .bg-\[\#111d33\],
+:not(.light) .bg-\[\#111D33\] {
+  background-color: #12213A !important;
+}
+
+:not(.light) .bg-\[\#1A1D23\]\/30 {
+  background-color: rgba(15, 24, 42, 0.3) !important;
+}
+
+/* High-tech border highlights */
+:not(.light) .border-white\/10 {
+  border-color: rgba(10, 132, 255, 0.16) !important;
+}
+:not(.light) .border-white\/5 {
+  border-color: rgba(10, 132, 255, 0.08) !important;
+}
+
+/* --------------------------------------------------
+   1. GLOBAL RESET & SHELL
+   -------------------------------------------------- */
+html,
+body,
+#root,
+#app {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+/* --------------------------------------------------
+   2. VIEWPORT-BASED APPLICATION SHELL
+   -------------------------------------------------- */
+.mavis-app {
+  width: 100%;
+  height: 100dvh;
+  min-width: 0;
+  min-height: 0;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  overflow: hidden;
+}
+
+/* --------------------------------------------------
+   3. DESKTOP WORKSPACE LAYOUT
+   -------------------------------------------------- */
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(320px, 30vw, 420px);
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.radar-workspace {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.radar-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  flex: 1 1 auto;
+}
+
+.radar-stage canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* --------------------------------------------------
+   4. QUICK ACCESS PANEL & GRID (DESKTOP)
+   -------------------------------------------------- */
+.quick-access-panel {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(8px, 1.5vh, 12px);
+  gap: clamp(6px, 1.2vh, 10px);
+  min-width: 0;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  box-sizing: border-box;
+}
+
+.quick-access-header {
+  flex: 0 0 auto;
+}
+
+.quick-access-grid {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: clamp(6px, 1.2vh, 8px);
+  overflow: hidden;
+}
+
+/* --------------------------------------------------
+   5. ROLE CARDS & TYPOGRAPHY SCALING
+   -------------------------------------------------- */
+.role-card {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(8px, 1.5vh, 12px);
+  overflow: hidden;
+  gap: clamp(4px, 0.8vh, 6px);
+}
+
+.role-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  min-width: 0;
+  flex: 0 0 auto;
+}
+
+.role-status-badge {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.role-card-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  font-size: clamp(10px, 1.3vh, 12px);
+  line-height: 1.25;
+  flex: 0 0 auto;
+}
+
+.role-card-title-text {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+.role-card-description {
+  margin-top: 2px;
+  font-size: clamp(10px, 1.2vh, 12px);
+  line-height: 1.35;
+  color: #94a3b8;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+
+.role-card-action {
+  width: 100%;
+  min-width: 0;
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+.role-card-action button {
+  width: 100%;
+  min-width: 0;
+  height: auto;
+  min-height: clamp(28px, 4.5vh, 34px);
+  padding: 6px 8px;
+  font-size: clamp(9px, 1.2vh, 11px);
+  font-weight: 800;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.2;
+}
+
+/* --------------------------------------------------
+   6. HEIGHT-RESPONSIVE ADAPTATIONS (<= 820px)
+   -------------------------------------------------- */
+@media (max-height: 820px) and (min-width: 1000px) {
+  .quick-access-panel {
+    padding: 8px;
+    gap: 6px;
+  }
+
+  .quick-access-grid {
+    gap: 6px;
+  }
+
+  .role-card {
+    padding: 8px;
+  }
+
+  .role-card-title {
+    margin-top: 2px;
+  }
+
+  .role-card-description {
+    margin-top: 2px;
+    line-height: 1.3;
+  }
+
+  .role-card-action {
+    padding-top: 4px;
+  }
+}
+
+/* --------------------------------------------------
+   7. RESPONSIVE BREAKPOINTS (WIDTH-BASED)
+   -------------------------------------------------- */
+/* Locked PC / Large Web view */
+@media (min-width: 1024px) {
+  .workspace {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) clamp(300px, 30vw, 420px);
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+}
+
+/* Tablet view (769px to 1023px) */
+@media (min-width: 769px) and (max-width: 1023px) {
+  .workspace {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .main-radar-workspace {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    flex-shrink: 0;
+    overflow: visible;
+  }
+
+  .radar-container {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    flex-shrink: 0;
+    overflow: visible;
+  }
+
+  .radar-stage {
+    width: 100%;
+    height: 320px;
+    min-height: 240px;
+    max-height: 40vh;
+    flex-shrink: 0;
+  }
+
+  .flight-board {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px;
+    width: 100%;
+    height: auto;
+    max-height: none;
+    overflow: visible;
+    flex-shrink: 0;
+  }
+
+  .flight-board-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    height: auto;
+    overflow: visible;
+  }
+
+  .quick-access-panel {
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    height: auto;
+    min-height: 0;
+    flex-shrink: 0;
+    overflow: visible;
+    padding: 12px;
+  }
+
+  .quick-access-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: auto;
+    gap: 10px;
+    height: auto;
+    overflow: visible;
+  }
+
+  .role-card {
+    height: auto;
+    min-height: 125px;
+    padding: 12px;
+    overflow: visible;
+  }
+}
+
+/* Mobile view (max-width: 768px) - Strictly single-column (grid-cols-1) for flight boards and panels */
+@media (max-width: 768px) {
+  .workspace {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .main-radar-workspace {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    flex-shrink: 0;
+    overflow: visible;
+  }
+
+  .radar-container {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    flex-shrink: 0;
+    overflow: visible;
+  }
+
+  .radar-stage {
+    width: 100%;
+    height: 240px;
+    min-height: 180px;
+    max-height: 35vh;
+    flex-shrink: 0;
+  }
+
+  /* Single-column grid for Flight Boards on mobile (<= 768px) */
+  .flight-board {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    flex-shrink: 0 !important;
+    padding: 8px 6px !important;
+    gap: 8px !important;
+  }
+
+  .flight-board-section {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+  }
+
+  .flight-board-list {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* Single-column grid for Quick Access Panel on mobile (<= 768px) */
+  .quick-access-panel {
+    border-left: none !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    flex-shrink: 0 !important;
+    overflow: visible !important;
+    padding: 10px 8px !important;
+  }
+
+  .quick-access-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto !important;
+    gap: 8px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    overflow: visible !important;
+  }
+
+  .role-card {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 105px !important;
+    padding: 10px !important;
+    overflow: visible !important;
+  }
+
+  .role-card-title {
+    font-size: 12px !important;
+  }
+
+  .role-card-description {
+    font-size: 11px !important;
+    line-height: 1.35 !important;
+    -webkit-line-clamp: 2 !important;
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+
+  .role-card-action button {
+    padding: 8px 12px !important;
+    font-size: 11px !important;
+  }
+}
+
+/* Mobile Phone Landscape & Short Viewports (max-height: 520px) */
+@media (max-height: 520px), (orientation: landscape) and (max-width: 950px) {
+  .radar-stage {
+    height: clamp(140px, 42vh, 200px) !important;
+    min-height: 130px !important;
+  }
+
+  .flight-board {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    width: 100% !important;
+    padding: 6px 4px !important;
+    gap: 6px !important;
+  }
+
+  .quick-access-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 6px !important;
+  }
+
+  .role-card {
+    min-height: 90px !important;
+    padding: 8px !important;
+  }
+
+  .fixed > div:not(.pointer-events-none) {
+    max-height: calc(100dvh - 10px) !important;
+  }
+}
+
+/* --------------------------------------------------
+   8. COMPACT SYSTEM FOOTER
+   -------------------------------------------------- */
+.system-footer {
+  min-height: 22px;
+  max-height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 10px;
+  overflow: hidden;
+}
+
+/* --------------------------------------------------
+   9. INTERFACE THEME OVERRIDES (LIGHT MODE - DEDICATED HIGH CONTRAST & PROJECTOR SAFE)
+   -------------------------------------------------- */
+.light,
+.light body,
+.light .mavis-app,
+.light main,
+.light #mavis-workspace-root,
+.light #flight-ops-list {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+}
+
+/* 1. Page Surfaces & Container Backgrounds (Non-Buttons) */
+.light div:not(button):not([role="button"])[class*="bg-[#0A0B0E]"],
+.light div:not(button):not([role="button"])[class*="bg-[#0a0b0e]"],
+.light div:not(button):not([role="button"])[class*="bg-[#060F1F]"],
+.light div:not(button):not([role="button"])[class*="bg-[#060f1f]"],
+.light div:not(button):not([role="button"])[class*="bg-[#0A0C10]"],
+.light div:not(button):not([role="button"])[class*="bg-[#0a0c10]"],
+.light div:not(button):not([role="button"]).bg-slate-950,
+.light section[class*="bg-[#0A0B0E]"],
+.light section[class*="bg-[#060F1F]"],
+.light main[class*="bg-[#0A0B0E]"] {
+  background-color: #f8fafc !important;
+}
+
+.light div:not(button):not([role="button"])[class*="bg-[#0F1117]"],
+.light div:not(button):not([role="button"])[class*="bg-[#0f1117]"],
+.light div:not(button):not([role="button"])[class*="bg-[#161920]"],
+.light div:not(button):not([role="button"])[class*="bg-[#15181E]"],
+.light div:not(button):not([role="button"])[class*="bg-[#12141C]"],
+.light div:not(button):not([role="button"]).bg-slate-900,
+.light section[class*="bg-[#0F1117]"],
+.light form[class*="bg-[#0F1117]"],
+.light header[class*="bg-[#0F1117]"] {
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  color: #020617 !important;
+}
+
+.light div:not(button):not([role="button"])[class*="bg-[#0F1117]"] * {
+  color: #020617 !important;
+}
+
+.light div:not(button):not([role="button"])[class*="bg-[#1A1D23]"],
+.light div:not(button):not([role="button"])[class*="bg-[#1a1d23]"],
+.light div:not(button):not([role="button"])[class*="bg-[#111d33]"],
+.light div:not(button):not([role="button"])[class*="bg-[#111D33]"],
+.light div:not(button):not([role="button"])[class*="bg-[#181C26]"],
+.light div:not(button):not([role="button"])[class*="bg-[#121620]"],
+.light input[class*="bg-[#1A1D23]"],
+.light select[class*="bg-[#1A1D23]"] {
+  background-color: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+  color: #020617 !important;
+}
+
+.light .bg-white\/2 { background-color: #f8fafc !important; border-color: #cbd5e1 !important; }
+.light .bg-white\/5 { background-color: #f1f5f9 !important; border-color: #cbd5e1 !important; }
+.light .bg-white\/10 { background-color: #e2e8f0 !important; border-color: #cbd5e1 !important; }
+
+/* 2. Modals, Overlays, Drawers & Toasts in Light Mode */
+.light .fixed[class*="bg-black"],
+.light .fixed [class*="bg-black/60"],
+.light .fixed [class*="bg-black/75"],
+.light .fixed [class*="bg-black/80"] {
+  background-color: rgba(15, 23, 42, 0.65) !important;
+}
+
+/* Modal Dialog Surface & Container Overrides in Light Mode */
+.light .fixed > div:not(.pointer-events-none),
+.light .fixed [class*="max-w-"],
+.light .fixed [class*="max-h-"],
+.light [id*="drawer"],
+.light [id*="modal"],
+.light [id*="dialog"] {
+  background-color: #ffffff !important;
+  color: #020617 !important;
+  border-color: #cbd5e1 !important;
+}
+
+/* Cards & Inner Containers inside Modals in Light Mode */
+.light .fixed div:not(button):not([role="button"])[class*="bg-[#"],
+.light .fixed div:not(button):not([role="button"])[class*="bg-black/"],
+.light .fixed div:not(button):not([role="button"])[class*="bg-white/"],
+.light [id*="drawer"] div:not(button):not([role="button"])[class*="bg-[#"],
+.light [id*="drawer"] div:not(button):not([role="button"])[class*="bg-black/"] {
+  background-color: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+  color: #020617 !important;
+}
+
+/* Modal Headers & Footers in Light Mode */
+.light .fixed [class*="sticky"][class*="top-0"],
+.light .fixed [class*="sticky"][class*="bottom-0"],
+.light [id*="drawer"] [class*="border-b"],
+.light [id*="drawer"] [class*="border-t"] {
+  background-color: #f8fafc !important;
+  border-color: #e2e8f0 !important;
+}
+
+/* Modal Headers, Labels and Paragraph Text in Light Mode */
+.light .fixed h1, .light .fixed h2, .light .fixed h3, .light .fixed h4, .light .fixed h5,
+.light [id*="drawer"] h1, .light [id*="drawer"] h2, .light [id*="drawer"] h3, .light [id*="drawer"] h4 {
+  color: #020617 !important;
+}
+
+.light .fixed p, .light .fixed label, .light [id*="drawer"] p, .light [id*="drawer"] label {
+  color: #1e293b !important;
+}
+
+/* Toast Container in Light Mode - Crisp white card with dark text */
+.light .fixed.bottom-14 > div,
+.light .fixed.bottom-14 div {
+  background-color: #ffffff !important;
+  color: #020617 !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.2) !important;
+  font-weight: 700 !important;
+}
+.light .fixed.bottom-14 > div *,
+.light .fixed.bottom-14 div * {
+  color: #020617 !important;
+}
+
+.light div:not(.fixed).bg-black\/80,
+.light div:not(.fixed).bg-black\/75,
+.light div:not(.fixed).bg-black\/50,
+.light div:not(.fixed).bg-black\/40 {
+  background-color: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+  color: #0f172a !important;
+}
+
+/* 3. Text Color Mapping for Light Mode Surfaces */
+.light .text-slate-50 { color: #020617 !important; font-weight: 800 !important; }
+.light .text-slate-100 { color: #0f172a !important; font-weight: 700 !important; }
+.light .text-slate-200 { color: #0f172a !important; font-weight: 700 !important; }
+.light .text-slate-300 { color: #1e293b !important; font-weight: 600 !important; }
+.light .text-slate-400 { color: #1e293b !important; font-weight: 600 !important; }
+.light .text-slate-500 { color: #334155 !important; font-weight: 600 !important; }
+.light .text-slate-600 { color: #334155 !important; font-weight: 600 !important; }
+.light .text-slate-700 { color: #1e293b !important; font-weight: 700 !important; }
+.light .text-slate-800 { color: #0f172a !important; font-weight: 700 !important; }
+.light .text-slate-900 { color: #020617 !important; font-weight: 800 !important; }
+
+.light .text-sky-400 { color: #0284c7 !important; font-weight: 700 !important; }
+.light .text-sky-500 { color: #0284c7 !important; font-weight: 700 !important; }
+.light .text-sky-600 { color: #0369a1 !important; font-weight: 800 !important; }
+.light .text-sky-700 { color: #0369a1 !important; font-weight: 800 !important; }
+.light .text-sky-800 { color: #075985 !important; font-weight: 800 !important; }
+
+.light .text-emerald-400 { color: #15803d !important; font-weight: 700 !important; }
+.light .text-emerald-500 { color: #15803d !important; font-weight: 700 !important; }
+.light .text-emerald-600 { color: #166534 !important; font-weight: 800 !important; }
+
+.light .text-amber-400 { color: #b45309 !important; font-weight: 700 !important; }
+.light .text-amber-500 { color: #b45309 !important; font-weight: 700 !important; }
+.light .text-amber-600 { color: #92400e !important; font-weight: 800 !important; }
+
+.light .text-rose-400 { color: #b91c1c !important; font-weight: 700 !important; }
+.light .text-rose-500 { color: #b91c1c !important; font-weight: 700 !important; }
+.light .text-rose-600 { color: #991b1b !important; font-weight: 800 !important; }
+
+.light .text-purple-400 { color: #6b21a8 !important; font-weight: 700 !important; }
+.light .text-indigo-400 { color: #3730a3 !important; font-weight: 700 !important; }
+
+/* General text-white on light surfaces turns to dark navy EXCEPT inside solid action buttons */
+.light div:not(button):not([role="button"]) > .text-white,
+.light p:not(button) > .text-white,
+.light span:not(button):not(.btn-primary) > .text-white,
+.light td .text-white,
+.light th .text-white,
+.light label .text-white,
+.light .text-white:not(button):not(.btn-primary) {
+  color: #020617 !important;
+}
+
+/* 4. SOLID ACTION BUTTONS & BADGES - PRESERVE WHITE TEXT */
+.light button.bg-sky-500,
+.light button.bg-sky-600,
+.light button.bg-sky-700,
+.light button.bg-sky-800,
+.light button.bg-sky-900,
+.light button.bg-blue-600,
+.light button.bg-blue-700,
+.light button.bg-emerald-500,
+.light button.bg-emerald-600,
+.light button.bg-emerald-700,
+.light button.bg-rose-500,
+.light button.bg-rose-600,
+.light button.bg-rose-700,
+.light button.bg-purple-600,
+.light button.bg-indigo-600,
+.light button.bg-slate-800,
+.light button.bg-slate-900,
+.light button.bg-slate-950,
+.light button.bg-black,
+.light .btn-primary,
+.light a.btn-primary {
+  background-color: #0284c7 !important;
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  border: none !important;
+}
+
+.light button.bg-slate-800,
+.light button.bg-slate-900,
+.light button.bg-black {
+  background-color: #0f172a !important;
+  color: #ffffff !important;
+}
+
+.light button.bg-emerald-500,
+.light button.bg-emerald-600,
+.light button.bg-emerald-700 {
+  background-color: #16a34a !important;
+  color: #ffffff !important;
+}
+
+.light button.bg-rose-500,
+.light button.bg-rose-600,
+.light button.bg-rose-700 {
+  background-color: #dc2626 !important;
+  color: #ffffff !important;
+}
+
+.light button.bg-purple-600 {
+  background-color: #9333ea !important;
+  color: #ffffff !important;
+}
+
+/* Children and text-white inside explicit solid action buttons remain crisp white */
+.light .btn-primary *,
+.light .btn-primary .text-white,
+.light button.bg-sky-500 *,
+.light button.bg-sky-600 *,
+.light button.bg-sky-700 *,
+.light button.bg-sky-800 *,
+.light button.bg-sky-900 *,
+.light button.bg-blue-600 *,
+.light button.bg-blue-700 *,
+.light button.bg-emerald-500 *,
+.light button.bg-emerald-600 *,
+.light button.bg-emerald-700 *,
+.light button.bg-rose-500 *,
+.light button.bg-rose-600 *,
+.light button.bg-rose-700 *,
+.light button.bg-purple-600 *,
+.light button.bg-indigo-600 *,
+.light button.bg-slate-800 *,
+.light button.bg-slate-900 *,
+.light button.bg-slate-950 *,
+.light button.bg-black *,
+.light button.bg-sky-500 .text-white,
+.light button.bg-sky-600 .text-white,
+.light button.bg-sky-700 .text-white,
+.light button.bg-sky-800 .text-white,
+.light button.bg-sky-900 .text-white,
+.light button.bg-blue-600 .text-white,
+.light button.bg-emerald-600 .text-white,
+.light button.bg-rose-600 .text-white,
+.light button.bg-purple-600 .text-white,
+.light button.bg-indigo-600 .text-white,
+.light button.bg-slate-800 .text-white,
+.light button.bg-slate-900 .text-white,
+.light button.bg-black .text-white {
+  color: #ffffff !important;
+}
+
+/* 5. SECONDARY / OUTLINE BUTTONS */
+.light button.bg-white\/5,
+.light button.bg-white\/10,
+.light button.bg-transparent,
+.light button.border-white\/10,
+.light button.border-slate-300,
+.light button.border-slate-400 {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border: 1.5px solid #64748b !important;
+  font-weight: 700 !important;
+}
+
+.light button.bg-white\/5 *,
+.light button.bg-white\/10 *,
+.light button.bg-transparent *,
+.light button.border-white\/10 *,
+.light button.border-slate-300 *,
+.light button.border-slate-400 * {
+  color: #0f172a !important;
+}
+
+.light button.bg-white\/5:hover,
+.light button.bg-white\/10:hover,
+.light button.bg-transparent:hover {
+  background-color: #e2e8f0 !important;
+  color: #020617 !important;
+  border-color: #0284c7 !important;
+}
+
+/* 6. DISABLED BUTTONS - High contrast, legible */
+.light button:disabled,
+.light button[disabled] {
+  background-color: #e2e8f0 !important;
+  color: #334155 !important;
+  border: 1.5px solid #cbd5e1 !important;
+  opacity: 0.85 !important;
+  cursor: not-allowed !important;
+}
+.light button:disabled *,
+.light button[disabled] * {
+  color: #334155 !important;
+}
+
+/* 7. SOFT TINT ALERT BANNERS & BADGES */
+.light .bg-sky-500\/10,
+.light .bg-sky-500\/20,
+.light .bg-sky-500\/30,
+.light .bg-sky-100,
+.light .bg-sky-50 {
+  background-color: #e0f2fe !important;
+  color: #0369a1 !important;
+  border: 1.5px solid #0284c7 !important;
+  font-weight: 800 !important;
+}
+.light .bg-sky-500\/10 *,
+.light .bg-sky-500\/20 *,
+.light .bg-sky-500\/30 *,
+.light .bg-sky-100 *,
+.light .bg-sky-50 * {
+  color: #0369a1 !important;
+}
+
+.light .bg-emerald-500\/10,
+.light .bg-emerald-500\/20,
+.light .bg-emerald-500\/30,
+.light .bg-emerald-100,
+.light .bg-emerald-50 {
+  background-color: #dcfce7 !important;
+  color: #14532d !important;
+  border: 1.5px solid #22c55e !important;
+  font-weight: 800 !important;
+}
+.light .bg-emerald-500\/10 *,
+.light .bg-emerald-500\/20 *,
+.light .bg-emerald-500\/30 *,
+.light .bg-emerald-100 *,
+.light .bg-emerald-50 * {
+  color: #14532d !important;
+}
+
+.light .bg-amber-500\/10,
+.light .bg-amber-500\/20,
+.light .bg-amber-500\/30,
+.light .bg-amber-100,
+.light .bg-amber-50 {
+  background-color: #fef3c7 !important;
+  color: #78350f !important;
+  border: 1.5px solid #f59e0b !important;
+  font-weight: 800 !important;
+}
+.light .bg-amber-500\/10 *,
+.light .bg-amber-500\/20 *,
+.light .bg-amber-500\/30 *,
+.light .bg-amber-100 *,
+.light .bg-amber-50 * {
+  color: #78350f !important;
+}
+
+.light .bg-rose-500\/10,
+.light .bg-rose-500\/20,
+.light .bg-rose-500\/30,
+.light .bg-rose-100,
+.light .bg-rose-50 {
+  background-color: #fee2e2 !important;
+  color: #7f1d1d !important;
+  border: 1.5px solid #ef4444 !important;
+  font-weight: 800 !important;
+}
+.light .bg-rose-500\/10 *,
+.light .bg-rose-500\/20 *,
+.light .bg-rose-500\/30 *,
+.light .bg-rose-100 *,
+.light .bg-rose-50 * {
+  color: #7f1d1d !important;
+}
+
+.light .bg-purple-500\/10,
+.light .bg-purple-500\/20,
+.light .bg-purple-100 {
+  background-color: #f3e8ff !important;
+  color: #6b21a8 !important;
+  border: 1.5px solid #a855f7 !important;
+  font-weight: 800 !important;
+}
+.light .bg-purple-500\/10 *,
+.light .bg-purple-500\/20 *,
+.light .bg-purple-100 * {
+  color: #6b21a8 !important;
+}
+
+.light .bg-slate-500\/10,
+.light .bg-slate-500\/20,
+.light .bg-slate-200 {
+  background-color: #e2e8f0 !important;
+  color: #0f172a !important;
+  border: 1.5px solid #64748b !important;
+  font-weight: 800 !important;
+}
+.light .bg-slate-500\/10 *,
+.light .bg-slate-500\/20 *,
+.light .bg-slate-200 * {
+  color: #0f172a !important;
+}
+
+/* 8. Table & Form Controls */
+.light .divide-white\/10 > :not([hidden]) ~ :not([hidden]) { border-color: #cbd5e1 !important; }
+.light table { background-color: #ffffff !important; border: 1.5px solid #94a3b8 !important; }
+.light table th { color: #020617 !important; background-color: #cbd5e1 !important; font-weight: 800 !important; border-bottom: 2px solid #64748b !important; }
+.light table td { color: #0f172a !important; border-bottom: 1px solid #cbd5e1 !important; font-weight: 600 !important; }
+.light table tr:hover td { background-color: #f1f5f9 !important; }
+
+.light select { color: #0f172a !important; background-color: #ffffff !important; border: 1.5px solid #64748b !important; font-weight: 700 !important; }
+.light select option { background-color: #ffffff !important; color: #0f172a !important; }
+.light input { color: #0f172a !important; background-color: #ffffff !important; border: 1.5px solid #64748b !important; font-weight: 600 !important; }
+.light textarea { color: #0f172a !important; background-color: #ffffff !important; border: 1.5px solid #64748b !important; font-weight: 600 !important; }
+.light input::placeholder, .light textarea::placeholder { color: #475569 !important; opacity: 1 !important; }
+
+/* Border Overrides */
+.light .border-white\/10,
+.light .border-white\/5,
+.light .border-white\/20,
+.light .border-slate-800,
+.light .border-slate-700 { border-color: #94a3b8 !important; }
+
+.light .border-l-white\/10 { border-left-color: #94a3b8 !important; }
+.light .border-t-white\/10 { border-top-color: #94a3b8 !important; }
+.light .border-b-white\/10 { border-bottom-color: #94a3b8 !important; }
+.light .hover\:border-sky-500\/30:hover { border-color: #0284c7 !important; }
+.light .hover\:border-sky-500\/50:hover { border-color: #0284c7 !important; }
+.light .hover\:bg-white\/5:hover { background-color: #e2e8f0 !important; }
+
+/* Role Cards in Quick Access */
+.light .role-card {
+  background-color: #ffffff !important;
+  border: 1.5px solid #94a3b8 !important;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08);
+}
+.light .role-card:hover {
+  border-color: #0284c7 !important;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.16);
+}
+.light .role-card h4 {
+  color: #020617 !important;
+  font-weight: 800 !important;
+}
+.light .role-card p {
+  color: #1e293b !important;
+  font-weight: 600 !important;
+}
+
+/* Footer in Light Mode */
+.light .system-footer {
+  background-color: #ffffff !important;
+  border-top: 1px solid #94a3b8 !important;
+}
+.light .system-footer .text-slate-500 {
+  color: #334155 !important;
+  font-weight: 600 !important;
+}
+
+/* Modal and shadow styles */
+.light .shadow-2xl { box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.15) !important; }
+
+/* --------------------------------------------------
+   8. MAIN RADAR WORKSPACE & FLIGHT BOARD GRID
+   -------------------------------------------------- */
+.main-radar-workspace {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.radar-container {
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.flight-board {
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  max-height: min(34dvh, 320px);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  overflow: hidden;
+}
+
+.flight-board-section {
+  min-width: 0;
+  min-height: 0;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.flight-board-list {
+  min-width: 0;
+  min-height: 0;
+  display: grid;
+  grid-template-rows: repeat(3, minmax(0, auto));
+  gap: 6px;
+}
+
+.flight-board-row {
+  width: 100%;
+  min-width: 0;
+  height: auto;
+  min-height: 42px;
+  box-sizing: border-box;
+  display: grid !important;
+  grid-template-columns:
+    minmax(64px, 0.9fr)
+    minmax(72px, 1fr)
+    minmax(82px, 1.1fr)
+    minmax(58px, 0.9fr)
+    minmax(60px, 1fr);
+  align-items: center;
+  gap: 6px;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .flight-board {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding: 8px 6px !important;
+    gap: 8px !important;
+  }
+}
+

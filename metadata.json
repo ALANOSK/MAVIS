@@ -1,0 +1,6 @@
+{
+  "name": "MAVIS",
+  "description": "Manifest Aviation Integrated System for Digital APB processing, verification, and monitoring.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
